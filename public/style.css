@@ -1,0 +1,47 @@
+:root{
+    --jet: #151517;
+    --apple-green: #72b01dff;
+    --columbia-blue: #bad7f2ff;
+    --bittersweet: #e87461ff;
+    --citron: #bdc667ff;
+}
+
+html, body{
+    font-size:2vw;
+
+    padding:0;
+    margin:0;
+
+    background-color: var(--jet);
+}
+
+#title{
+    color: var(--apple-green);
+
+    font-family: monospace;
+    font-weight: 100;
+
+    text-align: center;
+}
+
+#login{
+    border: none;
+    border-radius: 0.3vw;
+
+    padding: 1vw 2vw;
+
+    background-color: var(--bittersweet);
+    color: var(--columbia-blue);
+
+    font-size:1vw;
+    font-weight: 100;
+
+    position: absolute;
+
+    top:50%;
+    right:50%;
+
+    transform: translate(50%,-50%);
+
+    box-shadow: 0 0 10px #008E97, 0 0 20px #008E97, 0 0 30px #008E97;
+}
