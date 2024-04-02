@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "socketio": "^1.0.0"
+  },
+  "name": "cube-critique",
+  "description": "A website where people post videos of them solving a rubik's cubes, for more experienced people to critique the solves",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
