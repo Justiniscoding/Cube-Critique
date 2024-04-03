@@ -17,16 +17,16 @@ server.listen(8080);
 const io = socketio(server);
 
 io.on("connection", socket => {
-    socket.on("authenticate", authCode => {
+    socket.on("authenticate", data => {
         var redirect_uri = "http://localhost:8080";
-        // redirect_uri = "https://evil-crab-58.telebit.io"
+        redirect_uri = "https://evil-crab-58.telebit.io"
 
         axios.post(`https://www.worldcubeassociation.org/oauth/token`, {
             grant_type:"authorization_code",
-            code: authCode,
+            code: data.code,
             client_id: process.env.CLIENT_ID,
             client_secret: process.env.CLIENT_SECRET,
-            redirect_uri: "http://localhost:8080",
+            redirect_uri: data.hostname,
         }).then(res => {
             socket.emit("authToken", res.data.access_token);
         }).catch(err => {
