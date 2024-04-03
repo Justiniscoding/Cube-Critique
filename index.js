@@ -18,9 +18,6 @@ const io = socketio(server);
 
 io.on("connection", socket => {
     socket.on("authenticate", data => {
-        var redirect_uri = "http://localhost:8080";
-        redirect_uri = "https://evil-crab-58.telebit.io"
-
         axios.post(`https://www.worldcubeassociation.org/oauth/token`, {
             grant_type:"authorization_code",
             code: data.code,
