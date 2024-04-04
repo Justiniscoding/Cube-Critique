@@ -22,18 +22,31 @@ server.listen(8080);
 
 const io = socketio(server);
 
+function promisePost(url, args){
+    return new Promise((resolve, reject) => {
+        axios.post(url, args).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        });
+    })
+}
+
 io.on("connection", socket => {
-    socket.on("authenticate", data => {
-        axios.post(`https://www.worldcubeassociation.org/oauth/token`, {
+    socket.on("authenticate", async data => {
+        const res = await promisePost(`https://www.worldcubeassociation.org/oauth/token`, {
             grant_type:"authorization_code",
             code: data.code,
             client_id: process.env.CLIENT_ID,
             client_secret: process.env.CLIENT_SECRET,
             redirect_uri: data.hostname,
-        }).then(res => {
-            socket.emit("authToken", res.data.access_token);
-        }).catch(err => {
-            console.log(err.toJSON());
         });
+
+        socket.emit("authToken", res.data);
+        registerUser(res.data.access_token);
     });
 });
+
+function registerUser(token){
+    
+}
