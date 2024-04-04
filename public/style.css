@@ -45,6 +45,8 @@ html, body{
 
     padding: 1vw 2vw;
 
+    max-height:5vh;
+
     background-color: var(--bittersweet);
     color: var(--columbia-blue);
 
@@ -52,6 +54,20 @@ html, body{
     font-weight: 100;
 }
 
-.login{
+.right, .left{
+    width:auto;
+    height:auto;
+    padding:none;
+}
+
+.left{
+    margin-right:auto;
+}
+
+.right{
     margin-left:auto;
+}
+
+.hidden{
+    display:none;
 }

@@ -10,9 +10,14 @@
     </head>
     <body>
         <nav id="navbar">
-            <button class="navButton home" onclick="redirectTo('/')">Home</button>
-            <button class="navButton leaderboard" onclick="redirectTo('/leaderboard')">Leaderboard</button>
-            <button class="navButton login" onclick="authenticate()">Login</button>
+            <div class="left">
+                <button class="navButton home" onclick="redirectTo('/')">Home</button>
+                <button class="navButton leaderboard" onclick="redirectTo('/leaderboard')">Leaderboard</button>
+            </div>
+            <div class="right">
+                <button class="navButton logout hidden" onclick="logout()">Logout</button>
+                <button class="navButton login" onclick="authenticate()">Login</button>
+            </div>
         </nav>
         <h1 id="title">Cube Critique</h1>
 
