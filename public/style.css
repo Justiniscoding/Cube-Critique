@@ -24,9 +24,24 @@ html, body{
     text-align: center;
 }
 
-#login{
+#navbar{
+    position:sticky;
+
+    width:100vw;
+    height:5vh;
+
+    display:flex;
+    gap:.5vw;
+
+    flex-direction: row;
+    background-color: var(--bittersweet);
+}
+
+.navButton{
     border: none;
-    border-radius: 0.3vw;
+    z-index:5;
+
+    cursor: pointer;
 
     padding: 1vw 2vw;
 
@@ -35,13 +50,8 @@ html, body{
 
     font-size:1vw;
     font-weight: 100;
+}
 
-    position: absolute;
-
-    top:50%;
-    right:50%;
-
-    transform: translate(50%,-50%);
-
-    box-shadow: 0 0 10px #008E97, 0 0 20px #008E97, 0 0 30px #008E97;
+.login{
+    margin-left:auto;
 }

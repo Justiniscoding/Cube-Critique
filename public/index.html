@@ -9,9 +9,13 @@
         <title>Cube Critique</title>
     </head>
     <body>
+        <nav id="navbar">
+            <button class="navButton home" onclick="redirectTo('/')">Home</button>
+            <button class="navButton leaderboard" onclick="redirectTo('/leaderboard')">Leaderboard</button>
+            <button class="navButton login" onclick="authenticate()">Login</button>
+        </nav>
         <h1 id="title">Cube Critique</h1>
 
-        <button id="login" onclick="authenticate()">Login</button>
         <script src="script.js"></script>
     </body>
 </html>

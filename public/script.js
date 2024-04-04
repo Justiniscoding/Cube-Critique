@@ -7,11 +7,7 @@ function $(selector){
 }
 
 function authenticate(){
-    var a = document.createElement("a");
-
-    a.href = `https://www.worldcubeassociation.org/oauth/authorize?client_id=Hi_lwIt7IM0PKYsbYiuqiXODs4Oz1N5qKihxYy3G5p4&redirect_uri=${encodeURIComponent(location.protocol + "//" + location.host)}&response_type=code&scope=`;
-
-    a.click();
+    redirectTo(`https://www.worldcubeassociation.org/oauth/authorize?client_id=Hi_lwIt7IM0PKYsbYiuqiXODs4Oz1N5qKihxYy3G5p4&redirect_uri=${encodeURIComponent(location.protocol + "//" + location.host)}&response_type=code&scope=`);
 }
 
 window.addEventListener("load", () => {
@@ -22,7 +18,6 @@ window.addEventListener("load", () => {
     }
 
     socket.emit("authenticate", {code: authCode, hostname: location.protocol + "//" + location.host});
-    window.location.href =  window.location.href.split("?")[0];
 });
 
 socket.on("authToken", token => {
@@ -34,5 +29,12 @@ socket.on("authToken", token => {
         }
     }).then(res => {
         alert("Your WCA ID is " + res.data.me.wca_id);
+        window.location.href =  window.location.href.split("?")[0];
     });
 });
+
+function redirectTo(url){
+    var a = document.createElement("a");
+    a.href = url;
+    a.click();
+}
