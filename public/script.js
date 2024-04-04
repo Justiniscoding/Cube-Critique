@@ -13,6 +13,19 @@ function authenticate(){
 window.addEventListener("load", () => {
     let authCode = new URLSearchParams(location.search).get("code");
 
+    if(localStorage.authToken){
+        if(localStorage.expiryTime < Date.now()){
+            logout();
+        }
+
+        var loginButton = $(".login");
+
+        loginButton.innerText = "Profile";
+        loginButton.onclick = showProfile;
+
+        $(".logout").classList.remove("hidden");
+    }
+
     if(!authCode){
         return;
     }
@@ -20,21 +33,26 @@ window.addEventListener("load", () => {
     socket.emit("authenticate", {code: authCode, hostname: location.protocol + "//" + location.host});
 });
 
-socket.on("authToken", token => {
-    // localStorage.authToken = token;
+socket.on("authToken", data => {
 
-    axios.get("https://www.worldcubeassociation.org/api/v0/me", {
-        headers:{
-            "Authorization": `Bearer ${token}`
-        }
-    }).then(res => {
-        alert("Your WCA ID is " + res.data.me.wca_id);
-        window.location.href =  window.location.href.split("?")[0];
-    });
+    localStorage.authToken = data.access_token;
+    localStorage.expiryTime = Date.now() + data.expires_in * 999
+
+    window.location.href = window.location.href.split("?")[0];
 });
 
 function redirectTo(url){
     var a = document.createElement("a");
     a.href = url;
     a.click();
+}
+
+function showProfile(){
+    alert("todo…");
+}
+
+function logout(){
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("expiryTime")
+    redirectTo("/");
 }
