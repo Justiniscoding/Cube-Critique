@@ -2,13 +2,19 @@ const express = require("express");
 const socketio = require("socket.io");
 const axios = require("axios");
 
+
 const http = require("http");
+const path = require("path");
 
 require("dotenv").config();
 
 const app = express();
 
 app.use(express.static("public"));
+
+app.get("*", (req, res) => {
+    res.status(404).sendFile(path.join(__dirname,"./public/404.html"));
+});
 
 const server = http.createServer(app);
 
