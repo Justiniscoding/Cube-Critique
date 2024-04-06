@@ -1,7 +1,8 @@
+const queries = require("./lib/queries");
+
 const express = require("express");
 const socketio = require("socket.io");
 const axios = require("axios");
-
 
 const http = require("http");
 const path = require("path");
@@ -32,6 +33,16 @@ function promisePost(url, args){
     })
 }
 
+function promiseGet(url, headers){
+    return new Promise((resolve, reject) => {
+        axios.get(url, {"headers":headers}).then(res => {
+            resolve(res);
+        }).catch(err => {
+            reject(err);
+        });
+    });
+}
+
 io.on("connection", socket => {
     socket.on("authenticate", async data => {
         const res = await promisePost(`https://www.worldcubeassociation.org/oauth/token`, {
@@ -47,6 +58,8 @@ io.on("connection", socket => {
     });
 });
 
-function registerUser(token){
-    
+async function registerUser(token){
+    const res = await promiseGet("https://www.worldcubeassociation.org/api/v0/me",{"Authorization":`Bearer ${token}`});
+
+    queries.createUser.run(res.data.me.name, "", res.data.me.wca_id);
 }
