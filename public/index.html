@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/@taufik-nurrohman/tag-picker@3.4.18/index.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <title>Cube Critique</title>
     </head>
@@ -20,7 +21,30 @@
             </div>
         </nav>
         <h1 id="title">Cube Critique</h1>
-
+        <button class="newpostbutton" onclick="showNewPostForm()">+ New Post</button>
+        
+        <div class="background " onclick="hideNewPostForm()"></div>
+        <div class="newpostform ">
+            <form action="" id="postForm">
+                <label for="url">Youtube Video URL</label>
+                <input type="text" name="url"><br>
+                <label for="content">Content</label><br>
+                <textarea name="content" maxlength="2000" form="postForm" id="" cols="30" rows="10"></textarea><br>
+                <label for="speed">Solve speed: (in seconds)</label>
+                <input type="number" name="speed" step="0.01" min="0" id=""><br>
+                <label for="type">Solve type</label>
+                <select name="type" id="">
+                    <option value="single">Single</option>
+                    <option value="mo3">mo3</option>
+                    <option value="ao5">ao5</option>
+                    <option value="ao12">ao12</option>
+                </select><br>
+                <label for="tags">Tags</label>
+                <input type="text" name="tags"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        
         <script src="script.js"></script>
     </body>
 </html>

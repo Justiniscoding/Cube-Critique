@@ -1,5 +1,7 @@
 const socket = io();
 
+let tagPicker;
+
 function $(selector){
     let elements = document.querySelectorAll(selector);
 
@@ -12,6 +14,10 @@ function authenticate(){
 
 window.addEventListener("load", () => {
     let authCode = new URLSearchParams(location.search).get("code");
+
+    // tagPicker = new TP($("input[name='tags']"), state = {
+    //     escape: [",", " "]
+    // });
 
     if(localStorage.authToken){
         if(localStorage.expiryTime < Date.now()){
@@ -56,3 +62,20 @@ function logout(){
     localStorage.removeItem("expiryTime")
     redirectTo("/");
 }
+
+function hideNewPostForm(){
+    $(".newpostform").classList.add("hidden");
+    $(".background").classList.add("hidden");
+}
+
+function showNewPostForm(){
+    $(".newpostform").classList.remove("hidden");
+    $(".background").classList.remove("hidden");
+}
+
+$("#postForm").addEventListener("submit",e => {
+    e.preventDefault();
+
+    var data = $("#postForm").elements;
+    console.log(data);
+})

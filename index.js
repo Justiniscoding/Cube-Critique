@@ -61,5 +61,8 @@ io.on("connection", socket => {
 async function registerUser(token){
     const res = await promiseGet("https://www.worldcubeassociation.org/api/v0/me",{"Authorization":`Bearer ${token}`});
 
-    queries.createUser.run(res.data.me.name, "", res.data.me.wca_id);
+    if(Object.values(queries.userExists.get(res.data.me.wca_id))[0] == 0){
+        // Create new user if not already created
+        queries.createUser.run(res.data.me.name, "", res.data.me.wca_id);
+    }
 }
